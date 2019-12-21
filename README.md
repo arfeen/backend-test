@@ -1,2 +1,2 @@
-# backend-test
+# Project Backend
 A simple test (backend)
