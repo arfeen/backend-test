@@ -26,9 +26,23 @@ class StarwarsController extends Controller {
      * @return string
      */
     public function actionGetapistatus() {
-        //print_r($_SERVER);
+
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         return ['status' => true];
+    }
+
+
+    public function actionGetlongestcrawl() {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $response = ['success' => false];
+        $service = new Starwars();
+        $titleInfo = $service->GetLongestCrawl();
+        if (count($titleInfo)) {
+            $response['success'] = true;
+            $response['title'] = $titleInfo[0]['title'];
+            return $response;
+        }
+        return $response;
     }
 
     /**

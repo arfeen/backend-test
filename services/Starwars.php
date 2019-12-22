@@ -14,7 +14,27 @@ class Starwars {
      * @return string
      */
     public function GetLongestCrawl() {
-        return ['status' => false];
+
+        $collection = \Yii::$app->mongodb->getCollection('films');
+        $result = $collection->aggregate([
+            [
+                '$project' => [
+                    'title' => true,
+                    'length' => [
+                        '$strLenCP' => '$opening_crawl'
+                    ]
+                ],
+            ],
+            [
+                '$sort' => [
+                    "length" => -1
+                ]
+            ],
+            [
+                '$limit' => 1
+            ]
+        ]);
+        return $result;
     }
 
     /**

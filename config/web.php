@@ -70,6 +70,7 @@ $config = [
             'rules' => [
                 '/' => 'starwars/getapistatus',
                 'api/status' => 'starwars/getapistatus',
+                'api/longest-opening-credits' => 'starwars/getlongestcrawl'
                 'api/most-appeared' => 'starwars/getlongestcrawl'
             ],
         ],

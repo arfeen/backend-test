@@ -20,4 +20,10 @@ class StarwarsServicesTest extends \Codeception\Test\Unit {
         expect_that($total > 0);
     }
 
+    public function testGetLongestCrawlTitle() {
+        $service = new Starwars();
+        $record = $service->GetLongestCrawl();
+        expect_that(count($record));
+    }
+
 }
