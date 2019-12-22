@@ -14,6 +14,7 @@ class Starwars {
      * @return string
      */
     public function GetLongestCrawl() {
+
         $collection = \Yii::$app->mongodb->getCollection('films');
         $result = $collection->aggregate([
             [
@@ -41,7 +42,63 @@ class Starwars {
      * @return string
      */
     public function GetMostAppearedCharacter() {
-        return ['status' => false];
+        $collection = \Yii::$app->mongodb->getCollection('people');
+        $query = [
+            ['$lookup' => [
+                    'from' => "films",
+                    'let' => ['id' => '$id'],
+                    'pipeline' => [
+                        [
+                            '$match' => [
+                                '$expr' => [
+                                    '$in' => [
+                                        '$$id',
+                                        '$characters'
+                                    ]
+                                ]
+                            ]
+                        ],
+                        [
+                            '$project' => [
+                                'count' => 1
+                            ]
+                        ],
+                        [
+                            '$count' => 'title'
+                        ],
+                        [
+                            '$group' => [
+                                '_id' => '$title',
+                                'appearance_count' => [
+                                    '$sum' => '$title'
+                                ]
+                            ]
+                        ],
+                        [
+                            '$sort' => [
+                                'appearance_count' => -1
+                            ]
+                        ]
+                    ],
+                    'as' => 'films_recordset'
+                ]
+            ],
+            [
+                '$sort' => [
+                    'films_recordset.appearance_count' => -1
+                ]
+            ],
+            [
+                '$project' => [
+                    'name' => 1
+                ]
+            ],
+            [
+                '$limit' => 1
+            ]
+        ];
+        $result = $collection->aggregate($query);
+        return $result;
     }
 
     /**

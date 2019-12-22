@@ -31,6 +31,7 @@ class StarwarsController extends Controller {
         return ['status' => true];
     }
 
+
     public function actionGetlongestcrawl() {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $response = ['success' => false];
@@ -39,6 +40,25 @@ class StarwarsController extends Controller {
         if (count($titleInfo)) {
             $response['success'] = true;
             $response['title'] = $titleInfo[0]['title'];
+            return $response;
+        }
+        return $response;
+    }
+
+    /**
+     * api action to fetch most appeared character
+     *  
+     * @return string
+     */
+    public function actionGetlongestcrawl() {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $response = ['success' => false];
+        $service = new Starwars();
+        $titleInfo = $service->GetMostAppearedCharacter();
+        if (count($titleInfo)) {
+            $response['success'] = true;
+            $response['name'] = $titleInfo[0]['name'];
             return $response;
         }
         return $response;

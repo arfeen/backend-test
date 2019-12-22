@@ -7,7 +7,6 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
@@ -72,7 +71,7 @@ $config = [
                 '/' => 'starwars/getapistatus',
                 'api/status' => 'starwars/getapistatus',
                 'api/longest-opening-credits' => 'starwars/getlongestcrawl'
-                
+                'api/most-appeared' => 'starwars/getlongestcrawl'
             ],
         ],
     ],
