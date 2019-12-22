@@ -45,3 +45,13 @@ Following are the backend APIs developed
 http://[web_root]/backend-test-master/web/api/longest-opening-credit
 http://[web_root]/backend-test-master/web/api/most-appeared
 ~~~
+
+Tests:
+
+To run test
+
+~~~
+cd [project_root]
+$vendor/bin/codecept run
+
+~~~
