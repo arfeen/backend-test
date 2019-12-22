@@ -42,6 +42,6 @@ directly under the Web root.
 
 Following are the backend APIs developed
 ~~~
-http://localhost/proto-int/web/api/longest-opening-credit
-http://localhost/proto-int/web/api/most-appeared
+http://[web_root]/backend-test-master/web/api/longest-opening-credit
+http://[web_root]/backend-test-master/web/api/most-appeared
 ~~~
