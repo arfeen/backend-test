@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\services\Starwars;
 
 /**
  * class responsible for REST API controller
@@ -29,12 +30,30 @@ class StarwarsController extends Controller {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         return ['status' => true];
     }
-    
+
+    /**
+     * api action to fetch most appeared character
+     *  
+     * @return string
+     */
+    public function actionGetlongestcrawl() {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $response = ['success' => false];
+        $service = new Starwars();
+        $titleInfo = $service->GetMostAppearedCharacter();
+        if (count($titleInfo)) {
+            $response['success'] = true;
+            $response['name'] = $titleInfo[0]['name'];
+            return $response;
+        }
+        return $response;
+    }
+
     /**
      * error handler
      * @return string
      */
-
     public function actionError() {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $exception = Yii::$app->errorHandler->exception;
@@ -42,6 +61,5 @@ class StarwarsController extends Controller {
         $response['error'] = $exception;
         return $response;
     }
-    
-  
+
 }
