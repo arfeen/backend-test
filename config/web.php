@@ -70,7 +70,8 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '/' => 'starwars/getapistatus',
-                'api/status' => 'starwars/getapistatus'
+                'api/status' => 'starwars/getapistatus',
+                'api/longest-opening-credits' => 'starwars/getlongestcrawl'
                 
             ],
         ],
