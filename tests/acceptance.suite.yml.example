@@ -1,0 +1,10 @@
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver:
+            url: http://http://localdev/proto-int/web//
+            browser: firefox
+        - Yii2:
+            part: orm
+            entryScript: index.php
+            cleanup: false
